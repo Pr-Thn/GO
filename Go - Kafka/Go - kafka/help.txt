@@ -1,0 +1,35 @@
+-- docker compose up
+    - docker pull bitnami/kafka
+    - docker run zookeeper
+
+-- command line
+    - docker container exec -it kafka /bin/sh // access to kafka 
+    - docker ps // show container which running 
+    - cd opt / cd bitnami / cd kafka / cd bin // access to the command line in docker
+    - kafka-topics.sh --bootstrap-server=localhost:9092 --topic=test --create
+    - kafka-topics.sh --list 
+
+-- command line 1 producer
+    - kafka-console-producer.sh --bootstrap-server=localhost:9092 --topic=test1
+    - test1 / test2 / test3
+
+-- command line 2 consumer
+    - kafka-console-consumer.sh --bootstrap-server=localhost:9092 --topic=test1 -from-beginning
+
+-- include 
+    - kafka-console-consumer.sh --bootstrap-server=localhost:9092 
+
+-- docker mysql
+    - docker pull mysql
+    - docker run --name=consumer -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 -d mysql
+    - docker inspect consumer
+    - docker exec -it 507a5d22d8c2 bash
+    - mysql -u root -p
+    - show databases;
+    - add databases banking.sql
+
+-- docker phpmyadmin
+    - docker pull phpmyadmin/phpmyadmin
+    - docker run --name myadmin -d --link consumer:db -p 8081:80 phpmyadmin/phpmyadmin
+    - http://localhost:8081
+    - username : root, password : 123456
