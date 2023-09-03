@@ -1,0 +1,71 @@
+-- run mysql on docker
+    - docker pull mysql
+    - docker run -d \
+        --name your_mysql_container \ mysql
+        -e MYSQL_ROOT_PASSWORD=your_mysql_root_password \ 
+        -e MYSQL_USER=your_mysql_user \
+        -e MYSQL_PASSWORD=your_mysql_password \ 
+        -e MYSQL_DATABASE=your_db_name \ // Databases name
+        -p 3306:3306 \ // Port 
+        mysql // name of your images
+
+-- Connected to mysql 
+    - sql.Open("mysql", "user:password@/dbname")
+    - sql.Open("mysql", "Mark123:123456@/banking")
+
+-- Access mysql in docker 
+    - docker container exec -it {container_ID} bash
+    - mysql -u root -p / password
+    - show Databases; / use banking; / show tables;
+    
+-- Create Databases in mysql
+    - DROP TABLE IF EXISTS `customers`;
+    - CREATE TABLE `customers` (
+            `customer_id` int(11) NOT NULL AUTO_INCREMENT,
+            `name` varchar(100) NOT NULL,
+            `date_of_birth` date NOT NULL,
+            `city` varchar(100) NOT NULL,
+            `zipcode` varchar(10) NOT NULL,
+            `status` tinyint(1) NOT NULL DEFAULT '1',
+            PRIMARY KEY (`customer_id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2006 DEFAULT CHARSET=latin1;
+    - INSERT INTO `customers` VALUES
+            (2000,'Steve','1978-12-15','Delhi','110075',1),
+            (2001,'Arian','1988-05-21','Newburgh, NY','12550',1),
+            (2002,'Hadley','1988-04-30','Englewood, NJ','07631',1),
+            (2003,'Ben','1988-01-04','Manchester, NH','03102',0),
+            (2004,'Nina','1988-05-14','Clarkston, MI','48348',1),
+            (2005,'Osman','1988-11-08','Hyattsville, MD','20782',0);
+
+    - DROP TABLE IF EXISTS `users`;
+    - CREATE TABLE `users` (
+            `username` varchar(20) NOT NULL,
+            `password` varchar(20) NOT NULL,
+            `role` varchar(20) NOT NULL,
+            `customer_id` int(11) DEFAULT NULL,
+            `created_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (`username`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    - INSERT INTO `users` VALUES
+            ('admin','abc123','admin', NULL, '2020-08-09 10:27:22'),
+            ('2001','abc123','user', 2001, '2020-08-09 10:27:22'),
+            ('2000','abc123','user', 2000, '2020-08-09 10:27:22');
+
+    - CREATE TABLE AnimalTable (
+            ID INT PRIMARY KEY,
+            AnimalName VARCHAR(255)
+            );
+    - INSERT INTO AnimalTable (ID, AnimalName)
+            VALUES
+                (1, 'Dog'),
+                (2, 'Cat'),
+                (3, 'Fish'),
+                (4, 'Bird'),
+                (5, 'Rabbit'),
+                (6, 'Horse'),
+                (7, 'Snake'),
+                (8, 'Turtle'),
+                (9, 'Hamster'),
+                (10, 'Guinea Pig');
+                
+
